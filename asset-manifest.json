@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/blind-printing-simulator/static/css/main.04b833a3.css",
+    "main.js": "/blind-printing-simulator/static/js/main.3d711f10.js",
+    "index.html": "/blind-printing-simulator/index.html",
+    "main.04b833a3.css.map": "/blind-printing-simulator/static/css/main.04b833a3.css.map",
+    "main.3d711f10.js.map": "/blind-printing-simulator/static/js/main.3d711f10.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.04b833a3.css",
+    "static/js/main.3d711f10.js"
+  ]
+}
