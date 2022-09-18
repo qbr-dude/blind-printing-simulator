@@ -1,41 +1,66 @@
 import React, { memo, useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchText } from '../../API/text-fetch';
 import { useKeyPressEvent } from '../../hooks/use-events';
+import { useInterval } from '../../hooks/use-interval';
 import './text-area.css';
 
+const cyrillicPattern = /^[\u0400-\u04FF]+$/;
+
 const TextArea = memo(() => {
-    const [letterIndex, setLetterIndex] = useState(0);
-    const [incorrectCount, setIncorrectCount] = useState(0);
     const [text, setText] = useState('');
+    const [lettersPerSec, setLettersPerSec] = useState(0);
+
+    const letterIndex = useSelector(state => state.info.generalCount);
+    const incorrectCount = useSelector(state => state.info.errors);
 
     const dispatch = useDispatch();
-
-    useKeyPressEvent({
-        callback: (event) => {
-            if (event.key === 'Shift' || event.key === 'Alt' || event.key === 'Ctrl')
-                return;
-            if (event.code === 'Space' && text[letterIndex].key !== ' ')
-                return;
-            const temp = text;
-            if (event.key === text[letterIndex].key) {
-                temp[letterIndex].status = 'passed';
-            } else {
-                temp[letterIndex].status = 'incorrect';
-                dispatch({ type: 'WRONG_PRINT', payload: (incorrectCount + 1) });
-                setIncorrectCount(incorrectCount + 1);
-            }
-            dispatch({ type: 'GENERAL_PRINT', payload: (letterIndex + 1) });
-            setText(temp);
-            setLetterIndex(letterIndex + 1);
-        }
-    });
 
     useEffect(() => {
         getTextFromAPI();
     }, []);
 
+    /** Обработка нажатия, не обрабатываются SHIFT, ALT, CTRL и SPACE, если текущий символ не пробел
+     *  Если верно нажат, то статус меняется на correct, иначе - incorrent
+     *  Также подсчитываются все нажатия, и используется подсчет нажатий/сек (обнуляется в хуке ниже)
+     */
+    useKeyPressEvent({
+        callback: (event) => {
+            // Проверка на кириллицу
+            if (cyrillicPattern.test(event.key)) {
+                dispatch({ type: 'CYRILLIC_DETECTED', payload: true });
+                return;
+            }
+
+            if (event.key === 'Shift' || event.key === 'Alt' || event.key === 'Ctrl')
+                return;
+            if (event.code === 'Space' && text[letterIndex].key !== ' ')
+                return;
+
+            const temp = text;
+            if (event.key === text[letterIndex].key) {
+                temp[letterIndex].status = 'correct';
+            } else {
+                temp[letterIndex].status = 'incorrect';
+                dispatch({ type: 'WRONG_PRINT', payload: (incorrectCount + 1) });
+            }
+
+            dispatch({ type: 'GENERAL_PRINT', payload: (letterIndex + 1) });
+            setLettersPerSec(lettersPerSec + 1);
+            setText(temp);
+        }
+    });
+
+    useInterval({
+        callback: () => {
+            dispatch({ type: 'UPDATE_PRINTSPEED', payload: lettersPerSec });
+            setLettersPerSec(0);
+        },
+        delay: 1000,
+    })
+
+    /** Getting text from API and changing status of all letters as inactive */
     const getTextFromAPI = async () => {
         const fetchingText = await fetchText();
 
@@ -44,8 +69,9 @@ const TextArea = memo(() => {
         }));
     }
 
+    /** Colorizing letter based on its status */
     const ColorizedLetter = ({ letter, index }) => {
-        let styles = `${letter.status}-letter`;
+        let styles = `letter ${letter.status}-letter`;
         if (index === letterIndex && letter.key !== ' ')
             styles += ' current-letter';
         return (<span
@@ -57,7 +83,7 @@ const TextArea = memo(() => {
     if (text)
         return (
             <Container fluid>
-                <Row className='text'>
+                <Row>
                     <Col>
                         {text.map((letter, index) => ColorizedLetter({ letter, index }))}
                     </Col>

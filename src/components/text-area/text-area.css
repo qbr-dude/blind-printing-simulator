@@ -1,11 +1,11 @@
-.text {
+.letter {
     font-size: 42px;
     font-weight: bold;
     color: rgb(90, 90, 90);
 }
 
-.passed-letter {
-    color: rgb(1, 95, 1);
+.correct-letter {
+    color: #015f01;
 }
 
 .incorrect-letter {
@@ -13,17 +13,15 @@
 }
 
 .current-letter {
+    border-radius: 5px;
+    outline: 3px solid #1348db;
     position: relative;
 }
-
-.current-letter::after {
+/* .current-letter::after {
     position: absolute;
-    display: inline-block;
     left: 0;
     bottom: 5px;
     width: 100%;
     height: 40px;
-    outline: 2px solid rgba(255, 255, 255, 0.7);
-    border-radius: 5px;
-    content: ' ';
-}
+    content: '';
+} */

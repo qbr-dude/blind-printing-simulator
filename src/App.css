@@ -1,10 +1,18 @@
-.app {
-    width: 100%;
-    height: 100vh;
-    background-color: rgb(19, 179, 219);
+body {
+    background-color: #13b3db !important;
 }
 
 .info-field {
-    background-color: rgb(37, 40, 199);
+    background-color: #1348db;
+    color: white;
+}
+
+.modal-header {
+    background-color: #1348db;
+    color: white;
+}
+
+.modal-body {
+    background-color: #13b3db;
     color: white;
 }

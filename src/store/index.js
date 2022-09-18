@@ -1,4 +1,6 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { InfoReducer } from './infoReducer';
+import { LanguageReducer } from './languageReducer';
 
-export const store = configureStore({ reducer: InfoReducer });
+const reducers = combineReducers({ info: InfoReducer, language: LanguageReducer })
+export const store = configureStore({ reducer: reducers });
