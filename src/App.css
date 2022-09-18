@@ -1,0 +1,10 @@
+.app {
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(19, 179, 219);
+}
+
+.info-field {
+    background-color: rgb(37, 40, 199);
+    color: white;
+}

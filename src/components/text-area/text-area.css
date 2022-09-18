@@ -1,0 +1,29 @@
+.text {
+    font-size: 42px;
+    font-weight: bold;
+    color: rgb(90, 90, 90);
+}
+
+.passed-letter {
+    color: rgb(1, 95, 1);
+}
+
+.incorrect-letter {
+    color:rgb(134, 10, 10);
+}
+
+.current-letter {
+    position: relative;
+}
+
+.current-letter::after {
+    position: absolute;
+    display: inline-block;
+    left: 0;
+    bottom: 5px;
+    width: 100%;
+    height: 40px;
+    outline: 2px solid rgba(255, 255, 255, 0.7);
+    border-radius: 5px;
+    content: ' ';
+}
