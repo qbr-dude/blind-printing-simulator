@@ -1,70 +1,24 @@
-# Getting Started with Create React App
+# __Blind Printing Simulator__
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# [Current website](https://qbr-dude.github.io/blind-printing-simulator) on _Github Pages_
 
-## Available Scripts
+## Technology Stack
+    - React
+    - Redux
+    - Bootstrap
+    - Axios
 
-In the project directory, you can run:
+## Deployment
+Download project, install dependencies (using `npm install`), run application (using `npm start`)
 
-### `npm start`
+## App Description
+The application performs the functions of a blind printing simulator. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Text is loaded from the API, which is divided into separate characters for convenient work with their highlighting. Correct input is _green_, incorrect input is _red_. Pressing the function keys (**Shift**, **Alt**, **Ctrl**) is ignored, so uppercase letters may not work when typing quickly. If you enter incorrectly, you cannot go back, the letter is marked as incorrect and the input continues.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+When printing, information is displayed on the right: 
+- the current speed per second
+- the number of incorrectly entered characters
+- the accuracy of the input. Additionally - total time and total speed.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+When the text ends, a new one is loaded and the information is reset to zero.

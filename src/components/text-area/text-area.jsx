@@ -50,9 +50,11 @@ const TextArea = memo(() => {
                 return;
             }
 
-            if (event.key === 'Shift' || event.key === 'Alt' || event.key === 'Ctrl')
+            if (event.key === 'Shift' || event.key === 'Alt' || event.key === 'Ctrl') //Обработка функциональных кнопок
                 return;
-            if (event.code === 'Space' && text[letterIndex].key !== ' ')
+            if (event.code === 'Space' && text[letterIndex].key !== ' ') //Обработка нажатия Space, если при этом символ не пробел
+                return;
+            if (event.code !== 'Space' && text[letterIndex].key === ' ') //Обратная обработка
                 return;
 
             const temp = text;
@@ -69,7 +71,7 @@ const TextArea = memo(() => {
         }
     });
 
-    //Ежесекундная обработка скорости печати
+    //Ежесекундная обработка скорости печати. Значение 'передается' в InfoField, затем обнуляется
     useInterval({
         callback: () => {
             dispatch({ type: 'UPDATE_PRINTSPEED', payload: lettersPerSec });
