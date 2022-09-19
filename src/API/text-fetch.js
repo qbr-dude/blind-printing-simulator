@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const fetchText = async () => {
+export const fetchAPIText = async () => {
     try {
         const response = await axios.get(`https://baconipsum.com/api/?type=meat-and-filler&paras=1`);
         const data = response.data;

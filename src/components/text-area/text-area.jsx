@@ -1,8 +1,9 @@
 import React, { memo, useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchText } from '../../API/text-fetch';
+import { fetchAPIText } from '../../API/text-fetch';
 import { useKeyPressEvent } from '../../hooks/use-events';
+import { useFetching } from '../../hooks/use-fetching';
 import { useInterval } from '../../hooks/use-interval';
 import './text-area.css';
 
@@ -17,9 +18,25 @@ const TextArea = memo(() => {
 
     const dispatch = useDispatch();
 
+    const [fetchText, isLoading, error] = useFetching(async () => {
+        //Проверка на конец текста, чтобы загрузить новый
+        if (letterIndex !== 0 && letterIndex + 1 < text.length)
+            return;
+
+        // Сброс значений
+        setText('');
+        dispatch({ type: 'RESET_ALL' });
+        const fetchingText = await fetchAPIText();
+
+        //Добавление статуса для подсветки буковок
+        setText(fetchingText.map((letter) => {
+            return { key: letter, status: 'inactive' };
+        }));
+    });
+
     useEffect(() => {
-        getTextFromAPI();
-    }, []);
+        fetchText();
+    }, [letterIndex]);
 
     /** Обработка нажатия, не обрабатываются SHIFT, ALT, CTRL и SPACE, если текущий символ не пробел
      *  Если верно нажат, то статус меняется на correct, иначе - incorrent
@@ -60,15 +77,6 @@ const TextArea = memo(() => {
         delay: 1000,
     })
 
-    /** Getting text from API and changing status of all letters as inactive */
-    const getTextFromAPI = async () => {
-        const fetchingText = await fetchText();
-
-        setText(fetchingText.map((letter) => {
-            return { key: letter, status: 'inactive' };
-        }));
-    }
-
     /** Colorizing letter based on its status */
     const ColorizedLetter = ({ letter, index }) => {
         let styles = `letter ${letter.status}-letter`;
@@ -83,15 +91,13 @@ const TextArea = memo(() => {
     if (text)
         return (
             <Container fluid>
-                <Row>
-                    <Col>
-                        {text.map((letter, index) => ColorizedLetter({ letter, index }))}
-                    </Col>
-                </Row>
+                {text.map((letter, index) => ColorizedLetter({ letter, index }))}
             </Container >
         );
     else
-        return null;
+        return (
+            <h1 style={{ color: '#1348db' }}>Text is loading...</h1>
+        );
 });
 
 export default TextArea;

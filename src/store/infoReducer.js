@@ -12,6 +12,8 @@ export const InfoReducer = (state = defaultState, action) => {
             return { ...state, generalCount: action.payload };
         case 'UPDATE_PRINTSPEED':
             return { ...state, printSpeed: action.payload };
+        case 'RESET_ALL':
+            return { ...defaultState };
 
         default:
             return state;

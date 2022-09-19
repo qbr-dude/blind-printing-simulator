@@ -1,6 +1,6 @@
 {
   "name": "blind-printing-simulator",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "homepage": "htpps://qbr-dude.github.io/blind-printing-simulator",
   "private": true,
   "dependencies": {
