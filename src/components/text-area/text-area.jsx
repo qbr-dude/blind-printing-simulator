@@ -69,6 +69,7 @@ const TextArea = memo(() => {
         }
     });
 
+    //Ежесекундная обработка скорости печати
     useInterval({
         callback: () => {
             dispatch({ type: 'UPDATE_PRINTSPEED', payload: lettersPerSec });

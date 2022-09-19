@@ -7,6 +7,7 @@ const InfoField = memo(() => {
     const generalCount = useSelector(state => state.info.generalCount);
     const printSpeed = useSelector(state => state.info.printSpeed);
 
+    // Optional values
     const [generalTime, setGeneralTime] = useState(0);
     const [generalPrintSpeed, setGeneralPrintSpeed] = useState(0);
 
