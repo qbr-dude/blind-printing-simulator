@@ -1,7 +1,8 @@
 .letter {
     font-size: 42px;
     font-weight: bold;
-    color: rgb(90, 90, 90);
+    color: #379683  ;
+
 }
 
 .correct-letter {
@@ -14,14 +15,6 @@
 
 .current-letter {
     border-radius: 5px;
-    outline: 3px solid #1348db;
+    outline: 3px solid #05383B;
     position: relative;
 }
-/* .current-letter::after {
-    position: absolute;
-    left: 0;
-    bottom: 5px;
-    width: 100%;
-    height: 40px;
-    content: '';
-} */

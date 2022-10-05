@@ -99,7 +99,7 @@ const TextArea = memo(() => {
         );
     else
         return (
-            <h1 style={{ color: '#1348db' }}>Text is loading...</h1>
+            <h1 style={{ color: '#05383B' }}>Loading new text...</h1>
         );
 });
 

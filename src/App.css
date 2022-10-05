@@ -1,18 +1,23 @@
 body {
-    background-color: #13b3db !important;
+    background-color: #5CDB95 !important;
 }
 
 .info-field {
-    background-color: #1348db;
-    color: white;
+    background-color: #379683;
+    color: #05383B;
 }
 
 .modal-header {
-    background-color: #1348db;
-    color: white;
+    background-color: #05383B;
+    color: #EDF5E1;
 }
 
 .modal-body {
-    background-color: #13b3db;
-    color: white;
+    background-color: #379683;
+    color: #EDF5E1;
+}
+
+.modal-footer {
+    background-color: #379683 !important;
+    border-top: 0 !important;
 }

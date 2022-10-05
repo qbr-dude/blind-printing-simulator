@@ -3,8 +3,8 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 const InfoField = memo(() => {
-    const errors = useSelector(state => state.info.errors);
-    const generalCount = useSelector(state => state.info.generalCount);
+    const errors = useSelector(state => state.info.errors) || 0;
+    const generalCount = useSelector(state => state.info.generalCount) || 0;
     const printSpeed = useSelector(state => state.info.printSpeed);
 
     // Optional values
@@ -37,19 +37,19 @@ const InfoField = memo(() => {
                     <h1>Info about Testing</h1>
                 </Col>
                 <Col className='py-2'>
-                    <span style={{ fontSize: '24px' }}>General time: {generalTime} sec</span>
+                    <span style={{ fontSize: '24px' }}>General time: <span style={{ color: '#EDF5E1' }}>{generalTime}</span> sec</span>
                 </Col>
                 <Col className='py-2'>
-                    <span style={{ fontSize: '24px' }}>Wrong letters: {errors} ltrs</span>
+                    <span style={{ fontSize: '24px' }}>Wrong letters: <span style={{ color: '#EDF5E1' }}>{errors}</span> ltrs</span>
                 </Col>
                 <Col className='py-2'>
-                    <span style={{ fontSize: '24px' }}>Print speed: {printSpeed} ltrs/sec</span>
+                    <span style={{ fontSize: '24px' }}>Print speed: <span style={{ color: '#EDF5E1' }}>{printSpeed}</span> ltrs/sec</span>
                 </Col>
                 <Col className='py-2'>
-                    <span style={{ fontSize: '24px' }}>Print speed (avg): {generalPrintSpeed} ltrs/gen-time</span>
+                    <span style={{ fontSize: '24px' }}>Print speed (avg): <span style={{ color: '#EDF5E1' }}>{generalPrintSpeed}</span> ltrs/gen-time</span>
                 </Col>
                 <Col className='py-2'>
-                    <span style={{ fontSize: '24px' }}>Accuracy: {accuracy}%</span>
+                    <span style={{ fontSize: '24px' }}>Accuracy: <span style={{ color: '#EDF5E1' }}>{accuracy}</span>%</span>
                 </Col>
             </Row>
         </Container>
